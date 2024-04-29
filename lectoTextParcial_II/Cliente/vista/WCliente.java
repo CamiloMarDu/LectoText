@@ -8,6 +8,9 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 import java.awt.GridLayout;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JLabel;
@@ -25,9 +28,9 @@ public class WCliente extends JFrame {
 	private JButton btnLeer;
 	private JPanel panel;
 	private JLabel lblEnunciadoCliente;
-	private JSeparator separator_1;
 	private JTextField fieldCliente;
 	private JButton btnSalir;
+	private JLabel lblNewLabel;
 
 	
 	//Getters y Setters
@@ -64,11 +67,11 @@ public class WCliente extends JFrame {
 		
 
 		
-		btnLeer = new JButton("LEER");
+		btnLeer = new JButton("   LEER");
 		btnLeer.setSize(400, 45);
 		btnLeer.setLocation(160, 430);
 		btnLeer.setFont(new Font("Roboto", Font.BOLD, 30));
-		contentPane.add(btnLeer);
+		imagenEnBoton("src/imgs/logoParlante.png",btnLeer,50);
 		
 		JLabel lblEnunciado = new JLabel("<html>Digite el texto a leer:");
 		lblEnunciado.setFont(new Font("Roboto", Font.BOLD, 18));
@@ -80,6 +83,16 @@ public class WCliente extends JFrame {
 		panel.setBackground(new Color(255, 255, 255));
 		panel.setBounds(0, 0, 584, 120);
 		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblLogoLectoText = new JLabel("");
+		lblLogoLectoText.setBounds(27, 11, 110, 98);
+		imagenEnLabel("src/imgs/logoLectoText.png",lblLogoLectoText);
+		
+		lblNewLabel = new JLabel("LectoText: App Inclusiva");
+		lblNewLabel.setFont(new Font("Lucida Calligraphy", Font.BOLD, 25));
+		lblNewLabel.setBounds(147, 28, 379, 59);
+		panel.add(lblNewLabel);
 		
 		JSeparator separator = new JSeparator();
 		separator.setForeground(new Color(255, 255, 255));
@@ -97,10 +110,10 @@ public class WCliente extends JFrame {
 		btnSalir.setBounds(459, 216, 101, 31);
 		contentPane.add(btnSalir);
 		
-		separator_1 = new JSeparator();
-		separator_1.setForeground(Color.WHITE);
-		separator_1.setBounds(40, 192, 279, 2);
-		contentPane.add(separator_1);
+		JSeparator separatorCliente = new JSeparator();
+		separatorCliente.setForeground(Color.WHITE);
+		separatorCliente.setBounds(40, 192, 279, 2);
+		contentPane.add(separatorCliente);
 		
 		fieldCliente = new JTextField();
 		fieldCliente.setEnabled(false);
@@ -138,5 +151,27 @@ public class WCliente extends JFrame {
 	 */
 	public void enConsola(Object mensaje) {
 		System.out.println(mensaje);
+	}
+	/**
+	 * Ubica la imagen en el botón correspondiente.
+	 * @param imagen La ruta de la imagen.
+	 * @param boton El botón en el que se colocará la imagen.
+	 * @param tam Tamaño de la imagen, cuadrado.
+	 */
+	public void imagenEnBoton(String imagen, JButton boton, int tam) {
+		ImageIcon img_foto=new ImageIcon(imagen);
+		Image imgIns=img_foto.getImage();
+		Image newImg =imgIns.getScaledInstance(tam, tam, Image.SCALE_SMOOTH);
+		ImageIcon finalImage=new ImageIcon(newImg);
+		boton.setIcon(finalImage);
+		contentPane.add(boton);
+	}
+	public void imagenEnLabel(String imagen, JLabel label) {
+		ImageIcon img_foto=new ImageIcon(imagen);
+		Image imgIns=img_foto.getImage();
+		Image newImg =imgIns.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon finalImage=new ImageIcon(newImg);
+		label.setIcon(finalImage);
+		panel.add(label);
 	}
 }
