@@ -74,12 +74,17 @@ public class threadServidor extends Thread  {
               String ip = entrada.readUTF();
               String estado = entrada.readUTF();
               if(!verificacionRealizada) {
+            	  
             	  usuarioEnBase=controlUs.verificar(usuario, contraseña, ip, estado);
+            	  
             	  verificacionRealizada=true;
               }
-              if(usuarioEnBase) {
+              if(!usuarioEnBase) {
             	  serv.vista.aviso("servidor>>CLIENTE NO EXISTE");
+            	  salida.writeUTF("servidor>>CLIENTE NO EXISTE");
             	  break;
+              }else {
+            	  salida.writeUTF("di");
               }
               
           }

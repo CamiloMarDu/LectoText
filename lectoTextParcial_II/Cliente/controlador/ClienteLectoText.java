@@ -7,3 +7,4 @@ public class ClienteLectoText {
 		new GestorCliente();
 	}
 }
+

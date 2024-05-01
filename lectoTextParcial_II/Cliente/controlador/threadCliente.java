@@ -35,7 +35,7 @@ public class threadCliente extends Thread {
       
         while (true) {
             try {
-            	
+            	int opcion = entrada.readInt();
                 }
              catch (IOException e) {
             	ventCliente.enConsola("Error en la comunicación " + "Información para el usuario");

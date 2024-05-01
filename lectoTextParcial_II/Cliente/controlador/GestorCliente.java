@@ -37,9 +37,13 @@ public class GestorCliente implements ActionListener {
 		Contraseña=vista.pedirDato("Contraseña:");
 		estado="false";
 		conexion();
-		flujo();
+		boolean veri =verificarUsuario();
 		
-		//Creación de la ventana del cliente
+		if (!veri) {
+	        
+	        System.exit(0);
+	   
+		}
 		vista.setVisible(true);
         vista.setResizable(false);
         vista.setLocationRelativeTo(null);
@@ -50,6 +54,8 @@ public class GestorCliente implements ActionListener {
 
         this.vista.getBtnSalir().addActionListener(this);
         this.vista.getBtnSalir().setActionCommand("salir");
+		
+		
         
 	}
 	
@@ -90,9 +96,27 @@ public class GestorCliente implements ActionListener {
             salida.writeUTF(IP_SERVER);
             salida.writeUTF(estado);
             salida.flush(); 
+            
         } catch (IOException e) {
             vista.enConsola("error...." + e);
         }
     }
+
+	private boolean verificarUsuario() {
+	    try {
+	        // Envía los datos al servidor para verificar
+	        salida.writeUTF(usuario);
+	        salida.writeUTF(Contraseña);
+	        salida.writeUTF(IP_SERVER);
+	        salida.writeUTF(estado);
+
+	        // Espera la respuesta del servidor
+	        String respuesta = entrada.readUTF();
+	        return !respuesta.equals("servidor>>CLIENTE NO EXISTE");
+	    } catch (IOException e) {
+	        vista.enConsola("Error de comunicación con el servidor.");
+	        return false;
+	    }
 	
+}
 }
