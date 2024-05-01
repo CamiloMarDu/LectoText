@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 
 import ModeloCliente.Conexion;
 import vista.WCliente;
@@ -40,11 +41,12 @@ public class GestorCliente implements ActionListener {
 		boolean veri =verificarUsuario();
 		
 		if (!veri) {
-	        
+	        vista.aviso("ESTE USUARIO NO ESTA REGISTRADO");
 	        System.exit(0);
 	   
 		}
 		saludar();
+		vista.fieldCliente.setText(usuario);
 		vista.setVisible(true);
         vista.setResizable(false);
         vista.setLocationRelativeTo(null);
@@ -123,7 +125,9 @@ public class GestorCliente implements ActionListener {
 }
 	public void leer(String texto) {
 		try {
-		
+			String idioma=vista.getSelection(vista.groupIdiomas).getText();
+			
+		salida.writeUTF(idioma);
 			salida.writeUTF(texto);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

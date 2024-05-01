@@ -31,7 +31,7 @@ public class WCliente extends JFrame {
 	private JButton btnLeer;
 	private JPanel panel;
 	private JLabel lblEnunciadoCliente;
-	private JTextField fieldCliente;
+	public JTextField fieldCliente;
 	private JButton btnSalir;
 	private JLabel lblNewLabel;
 	
@@ -131,7 +131,7 @@ public class WCliente extends JFrame {
 		contentPane.add(fieldCliente);
 		fieldCliente.setColumns(10);
 		
-		rdbtnFrances = new JRadioButton("FRANCÉS");
+		rdbtnFrances = new JRadioButton("1");
 		groupIdiomas.add(rdbtnFrances);
 		rdbtnFrances.setFont(new Font("Roboto", Font.BOLD, 16));
 		rdbtnFrances.setForeground(new Color(255, 255, 255));
@@ -139,7 +139,7 @@ public class WCliente extends JFrame {
 		rdbtnFrances.setBounds(20, 371, 109, 23);
 		contentPane.add(rdbtnFrances);
 		
-		rdbtnEspañol = new JRadioButton("ESPAÑOL");
+		rdbtnEspañol = new JRadioButton("2");
 		rdbtnEspañol.setSelected(true);
 		groupIdiomas.add(rdbtnEspañol);
 		rdbtnEspañol.setFont(new Font("Roboto", Font.BOLD, 16));
@@ -148,7 +148,7 @@ public class WCliente extends JFrame {
 		rdbtnEspañol.setBounds(20, 395, 109, 23);
 		contentPane.add(rdbtnEspañol);
 		
-		rdbtnIngles = new JRadioButton("INGLÉS");
+		rdbtnIngles = new JRadioButton("3");
 		groupIdiomas.add(rdbtnIngles);
 		rdbtnIngles.setFont(new Font("Roboto", Font.BOLD, 16));
 		rdbtnIngles.setBackground(new Color(0, 0, 0));

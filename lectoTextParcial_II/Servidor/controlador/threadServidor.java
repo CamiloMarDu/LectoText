@@ -97,14 +97,28 @@ public class threadServidor extends Thread  {
               }else {
             	  salida.writeUTF("di");
               }
+              String idioma = entrada.readUTF();
               
               String texto = entrada.readUTF();
               
+              
               SynthesizerModeDesc required = new SynthesizerModeDesc();
               
-              required.setLocale(Locale.ROOT);
-              
-              Voice voice=new Voice(null, Voice.GENDER_FEMALE, Voice.GENDER_FEMALE, null);
+              if (idioma.equals("1")) {
+                  required.setLocale(Locale.ROOT); // Español (España)
+                  required.setEngineName("general");
+              } else if (idioma.equals("2")) {
+                  required.setLocale(Locale.GERMANY); // Francés
+                  required.setEngineName("general");
+              } else if (idioma.equals("3")) {
+                  required.setLocale(Locale.GERMAN); // Alemán
+                  required.setEngineName("general");
+              } else {
+                  required.setLocale(Locale.getDefault()); // Idioma predeterminado
+                  required.setEngineName("general");
+              }
+                  
+              Voice voice=new Voice(null, Voice.GENDER_MALE, Voice.GENDER_MALE, null);
               
               required.addVoice(voice);
               
