@@ -44,6 +44,7 @@ public class GestorCliente implements ActionListener {
 	        System.exit(0);
 	   
 		}
+		saludar();
 		vista.setVisible(true);
         vista.setResizable(false);
         vista.setLocationRelativeTo(null);
@@ -67,11 +68,12 @@ public class GestorCliente implements ActionListener {
          case "salir":
         	 if (this.vista.avisoCerrarVentana() == JOptionPane.YES_NO_OPTION) {
                  
-        		 
+        		 despedir();
+        		 System.exit(0);
              }
              break;
          case "leer":
-           
+           leer(vista.txaMostrar.getText());
              break;
 		 }
 	}
@@ -86,7 +88,7 @@ public class GestorCliente implements ActionListener {
         	vista.enConsola("\tEl servidor no esta levantado");
         	vista.enConsola("\t=============================");
         }
-        new threadCliente(entrada2, vista).start();
+      
     }
 	public void flujo() {
         try {
@@ -119,4 +121,19 @@ public class GestorCliente implements ActionListener {
 	    }
 	
 }
+	public void leer(String texto) {
+		try {
+		
+			salida.writeUTF(texto);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void saludar() {
+		leer("bienvenido "+ usuario);
+	}
+	public void despedir() {
+		leer("adios "+ usuario);
+	}
 }

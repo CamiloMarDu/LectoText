@@ -24,7 +24,7 @@ public class WCliente extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JScrollPane panelTexto;
-	private JTextArea txaMostrar;
+	public JTextArea txaMostrar;
 	private JButton btnLeer;
 	private JPanel panel;
 	private JLabel lblEnunciadoCliente;

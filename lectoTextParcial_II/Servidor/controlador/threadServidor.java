@@ -14,6 +14,7 @@ import javax.speech.EngineException;
 import javax.speech.EngineStateError;
 import javax.speech.synthesis.Synthesizer;
 import javax.speech.synthesis.SynthesizerModeDesc;
+import javax.speech.synthesis.Voice;
 
 import Modelo.Usuario;
 
@@ -78,12 +79,13 @@ public class threadServidor extends Thread  {
     	{
           try
           {
-        	  String usuario = entrada.readUTF();
-              String contraseña = entrada.readUTF();
-              String ip = entrada.readUTF();
-              String estado = entrada.readUTF();
+        	  
+
               if(!verificacionRealizada) {
-            	  
+            	  String usuario = entrada.readUTF();
+                  String contraseña = entrada.readUTF();
+                  String ip = entrada.readUTF();
+                  String estado = entrada.readUTF();
             	  usuarioEnBase=controlUs.verificar(usuario, contraseña, ip, estado);
             	  
             	  verificacionRealizada=true;
@@ -95,28 +97,37 @@ public class threadServidor extends Thread  {
               }else {
             	  salida.writeUTF("di");
               }
+              
               String texto = entrada.readUTF();
               
-              // Sintetizar el texto en voz
               SynthesizerModeDesc required = new SynthesizerModeDesc();
-              required.setLocale(new Locale("es", "ES")); // Establecemos el idioma a español de España
-              Synthesizer synth = Central.createSynthesizer(required);
+              
+              required.setLocale(Locale.ROOT);
+              
+              Voice voice=new Voice(null, Voice.GENDER_FEMALE, Voice.GENDER_FEMALE, null);
+              
+              required.addVoice(voice);
+              
+              Synthesizer synth = Central.createSynthesizer(null);
+              
               synth.allocate();
               synth.resume();
-              synth.speakPlainText(texto, null);
+              
+              synth.speakPlainText(texto,null);
+              
               synth.waitEngineState(Synthesizer.QUEUE_EMPTY);
               synth.deallocate();
           }
-          catch (IOException e) {System.out.println("El cliente termino la conexion");break;} catch (IllegalArgumentException e) {
+          catch (IOException e) {System.out.println("El cliente termino la conexion");break;} catch (EngineException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (EngineException e) {
+		} catch (EngineStateError e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (AudioException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (EngineStateError e) {
+		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InterruptedException e) {
