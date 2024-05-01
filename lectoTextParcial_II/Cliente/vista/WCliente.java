@@ -18,19 +18,27 @@ import javax.swing.JToggleButton;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JTextField;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 public class WCliente extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JScrollPane panelTexto;
-	private JTextArea txaMostrar;
+	public JTextArea txaMostrar;
 	private JButton btnLeer;
 	private JPanel panel;
 	private JLabel lblEnunciadoCliente;
 	private JTextField fieldCliente;
 	private JButton btnSalir;
 	private JLabel lblNewLabel;
+	
+	public final ButtonGroup groupIdiomas = new ButtonGroup();
+	
+	public JRadioButton rdbtnEspañol;
+	public JRadioButton rdbtnIngles;
+	public JRadioButton rdbtnFrances;
 
 	
 	//Getters y Setters
@@ -76,7 +84,7 @@ public class WCliente extends JFrame {
 		JLabel lblEnunciado = new JLabel("<html>Digite el texto a leer:");
 		lblEnunciado.setFont(new Font("Roboto", Font.BOLD, 18));
 		lblEnunciado.setForeground(new Color(255, 255, 255));
-		lblEnunciado.setBounds(10, 330, 130, 69);
+		lblEnunciado.setBounds(20, 280, 130, 69);
 		contentPane.add(lblEnunciado);
 		
 		panel = new JPanel();
@@ -121,6 +129,32 @@ public class WCliente extends JFrame {
 		fieldCliente.setBounds(119, 150, 200, 20);
 		contentPane.add(fieldCliente);
 		fieldCliente.setColumns(10);
+		
+		rdbtnFrances = new JRadioButton("FRANCÉS");
+		groupIdiomas.add(rdbtnFrances);
+		rdbtnFrances.setFont(new Font("Roboto", Font.BOLD, 16));
+		rdbtnFrances.setForeground(new Color(255, 255, 255));
+		rdbtnFrances.setBackground(new Color(0, 0, 0));
+		rdbtnFrances.setBounds(20, 371, 109, 23);
+		contentPane.add(rdbtnFrances);
+		
+		rdbtnEspañol = new JRadioButton("ESPAÑOL");
+		rdbtnEspañol.setSelected(true);
+		groupIdiomas.add(rdbtnEspañol);
+		rdbtnEspañol.setFont(new Font("Roboto", Font.BOLD, 16));
+		rdbtnEspañol.setForeground(new Color(255, 255, 255));
+		rdbtnEspañol.setBackground(new Color(0, 0, 0));
+		rdbtnEspañol.setBounds(20, 395, 109, 23);
+		contentPane.add(rdbtnEspañol);
+		
+		rdbtnIngles = new JRadioButton("INGLÉS");
+		groupIdiomas.add(rdbtnIngles);
+		rdbtnIngles.setFont(new Font("Roboto", Font.BOLD, 16));
+		rdbtnIngles.setBackground(new Color(0, 0, 0));
+		rdbtnIngles.setForeground(new Color(255, 255, 255));
+		rdbtnIngles.setBounds(20, 421, 109, 23);
+		contentPane.add(rdbtnIngles);
+		
 	}
 	
 	
