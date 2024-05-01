@@ -34,7 +34,7 @@ public class Propiedades {
      */
     public Propiedades() throws IOException {    
         Properties prop = new Properties();
-        FileInputStream input = new FileInputStream("src/DATACliente/Cliente.properties");
+        FileInputStream input = new FileInputStream("Cliente/DATACliente/Cliente.properties");
         prop.load(input);
         
   

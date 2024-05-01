@@ -14,6 +14,7 @@ public class GestorServidor {
 		vista.setVisible(true);
         vista.setResizable(false);
         vista.setTitle("LectoText: SERVIDOR");
+        runServer();
 	}
 	public void runServer() {
         boolean listening = true;

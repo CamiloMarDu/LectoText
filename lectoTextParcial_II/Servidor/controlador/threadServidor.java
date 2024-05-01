@@ -16,7 +16,10 @@ public class threadServidor extends Thread  {
      Socket scli2=null;
      DataInputStream entrada=null;
      DataOutputStream salida=null;
-     DataOutputStream salida2=null;
+     boolean verificacionRealizada = false;
+     boolean usuarioEnBase = true;
+
+ 
      Usuario user;
   //   public static Vector<threadServidor> clientesActivos=new Vector();	
      String nameUser;
@@ -40,18 +43,9 @@ public class threadServidor extends Thread  {
       * Obtiene el nombre del usuario asociado al hilo del servidor.
       * @return Nombre del usuario.
       */
-     public String getNameUser()
-     {
-       return nameUser;
-     }
+   
      /**
-      * Establece el nombre del usuario asociado al hilo del servidor.
-      * @param name Nombre del usuario.
-      */
-     public void setNameUser(String name)
-     {
-       nameUser=name;
-     }
+    
      /**
       * Método que se ejecuta cuando se inicia el hilo.
       */
@@ -63,45 +57,31 @@ public class threadServidor extends Thread  {
     	{
           entrada=new DataInputStream(scli.getInputStream());
           salida=new DataOutputStream(scli.getOutputStream());
-          salida2=new DataOutputStream(scli2.getOutputStream());
-          this.setNameUser(entrada.readUTF());
+          
+          
           
     	}
     	catch (IOException e) {  e.printStackTrace();     }
     	
-        int opcion=0,numUsers=0;
-        String amigo="",mencli="";
-                
+      
+          
     	while(true)
     	{
           try
           {
-        	  if(controlUs.verificar(user.getUsuario(), user.getContraseña(), user.getIp(), user.getEstado())) {
-        	  }else {
-        		  
-        		 
-        	  }
-             opcion=entrada.readInt();
-             
-             /*switch(opcion)
-             {
-                case 1://envio de mensage a todos
-                   mencli=entrada.readUTF();
-                   
-                   enviaMsg(mencli);
-                   break;
-                case 2://envio de lista de activos
-                   numUsers=clientesActivos.size();
-                   salida.writeInt(numUsers);
-                   for(int i=0;i<numUsers;i++)
-                      salida.writeUTF(clientesActivos.get(i).nameUser);
-                   break;
-                case 3: // envia mensage a uno solo
-                   amigo=entrada.readUTF();//captura nombre de amigo
-                   mencli=entrada.readUTF();//mensage enviado
-                   enviaMsg(amigo,mencli);
-                   break;
-             }*/
+        	  String usuario = entrada.readUTF();
+              String contraseña = entrada.readUTF();
+              String ip = entrada.readUTF();
+              String estado = entrada.readUTF();
+              if(!verificacionRealizada) {
+            	  usuarioEnBase=controlUs.verificar(usuario, contraseña, ip, estado);
+            	  verificacionRealizada=true;
+              }
+              if(usuarioEnBase) {
+            	  serv.vista.aviso("servidor>>CLIENTE NO EXISTE");
+            	  break;
+              }
+              
           }
           catch (IOException e) {System.out.println("El cliente termino la conexion");break;}
     	}
@@ -114,10 +94,7 @@ public class threadServidor extends Thread  {
         catch(Exception et)
         {serv.vista.enConsola("no se puede cerrar el socket");}   
      }
-     /**
-      * Método para enviar un mensaje a todos los clientes.
-      * @param mencli Mensaje a enviar.
-      */
+    
  /*    public void enviaMsg(String mencli2)
      {
         threadServidor user=null;

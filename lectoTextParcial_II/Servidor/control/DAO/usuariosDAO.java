@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+
 
 import Modelo.ConexionBaseDeDatos;
 
@@ -15,7 +15,7 @@ public class usuariosDAO {
 	    private Statement st;
 	    private ResultSet rs;
 	    private int estados;
-	    public Boolean consultarExistencia(String usuario,String contraseña, int ip, String estado) {
+	    public Boolean consultarExistencia(String usuario,String contraseña, String ip, String estado) {
 	    	
 	    	String consulta="SELECT * FROM `usuarios` WHERE `usuario` LIKE '"+usuario+"'";
 	    	
@@ -31,7 +31,7 @@ public class usuariosDAO {
 	    			
 	    			
 	    			
-	    			if("false"==(rs.getString("estado")) && contraseña.equals((rs.getString("contraseña"))) && ip==(rs.getInt("ip")) ){
+	    			if("false"==(rs.getString("estado")) && contraseña.equals((rs.getString("contraseña"))) && ip==(rs.getString("ip")) ){
 	    				estados=1;
 	    			}else {
 	    				estados=0;

@@ -30,7 +30,7 @@ public class Propiedades {
 	     */
 	    public Propiedades() throws IOException {
 	        Properties prop = new Properties();
-	        FileInputStream input = new FileInputStream("src/DATAServidor/IPs.properties");
+	        FileInputStream input = new FileInputStream("Servidor/DATAServidor/IPs.properties");
 	        prop.load(input);
 	        
 	        envioPort = Integer.parseInt(prop.getProperty("envioIP"));

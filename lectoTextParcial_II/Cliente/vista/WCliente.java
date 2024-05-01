@@ -174,4 +174,7 @@ public class WCliente extends JFrame {
 		label.setIcon(finalImage);
 		panel.add(label);
 	}
+	public String pedirIp() {
+		 return JOptionPane.showInputDialog("Introducir IP_SERVER :","localhost");
+   }
 }

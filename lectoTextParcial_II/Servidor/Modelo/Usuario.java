@@ -3,9 +3,9 @@ package Modelo;
 public class Usuario {
 	String usuario;
 	String contraseña;
-	int ip;
+	String ip;
 	String estado;
-	public Usuario(String usuario, String contraseña, int ip, String estado) {
+	public Usuario(String usuario, String contraseña, String ip, String estado) {
 		this.usuario=usuario;
 		this.contraseña=contraseña;
 		this.ip=ip;
@@ -23,10 +23,10 @@ public class Usuario {
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
 	}
-	public int getIp() {
+	public String getIp() {
 		return ip;
 	}
-	public void setIp(int ip) {
+	public void setIp(String ip) {
 		this.ip = ip;
 	}
 	public String getEstado() {
