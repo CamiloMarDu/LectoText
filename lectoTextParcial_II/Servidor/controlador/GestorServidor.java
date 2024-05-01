@@ -3,6 +3,8 @@ package controlador;
 import java.io.IOException;
 import java.net.Socket;
 
+import javax.speech.recognition.ResultEvent;
+
 import Modelo.Conexion;
 import vista.WServidor;
 
@@ -28,6 +30,7 @@ public class GestorServidor {
                     vista.enConsola("Esperando Usuarios");
                     sock = con.getServ().accept();
                     sock2 = con.getServ2().accept();
+                    
                 } catch (IOException e) {
                     vista.enConsola("Accept failed: " + con.getServ() + ", " + e.getMessage());
                     continue;
@@ -41,4 +44,6 @@ public class GestorServidor {
             vista.enConsola("error :" + e);
         }
     }
+	 
+	
 }

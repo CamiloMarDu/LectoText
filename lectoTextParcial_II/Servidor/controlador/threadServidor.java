@@ -4,7 +4,16 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Vector;
+
+import java.io.FileReader;
+import java.util.Locale;
+
+import javax.speech.AudioException;
+import javax.speech.Central;
+import javax.speech.EngineException;
+import javax.speech.EngineStateError;
+import javax.speech.synthesis.Synthesizer;
+import javax.speech.synthesis.SynthesizerModeDesc;
 
 import Modelo.Usuario;
 
@@ -86,9 +95,34 @@ public class threadServidor extends Thread  {
               }else {
             	  salida.writeUTF("di");
               }
+              String texto = entrada.readUTF();
               
+              // Sintetizar el texto en voz
+              SynthesizerModeDesc required = new SynthesizerModeDesc();
+              required.setLocale(new Locale("es", "ES")); // Establecemos el idioma a español de España
+              Synthesizer synth = Central.createSynthesizer(required);
+              synth.allocate();
+              synth.resume();
+              synth.speakPlainText(texto, null);
+              synth.waitEngineState(Synthesizer.QUEUE_EMPTY);
+              synth.deallocate();
           }
-          catch (IOException e) {System.out.println("El cliente termino la conexion");break;}
+          catch (IOException e) {System.out.println("El cliente termino la conexion");break;} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EngineException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (AudioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EngineStateError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	}
     	
     	try
@@ -100,59 +134,5 @@ public class threadServidor extends Thread  {
         {serv.vista.enConsola("no se puede cerrar el socket");}   
      }
     
- /*    public void enviaMsg(String mencli2)
-     {
-        threadServidor user=null;
-        for(int i=0;i<clientesActivos.size();i++)
-        {
-           serv.vista.mostrar("MENSAJE DEVUELTO:"+mencli2);
-           try
-            {
-              user=clientesActivos.get(i);
-              user.salida2.writeInt(1);//opcion de mensage 
-              user.salida2.writeUTF(""+this.getNameUser()+" >"+ mencli2);              
-            }catch (IOException e) {e.printStackTrace();}
-        }
-     }
-     /**
-      * Método para enviar la lista de usuarios activos a todos los clientes.
-      */
-     /*
-     public void enviaUserActivos()
-     {
-        threadServidor user=null;
-        for(int i=0;i<clientesActivos.size();i++)
-        {           
-           try
-            {
-              user=clientesActivos.get(i);
-              if(user==this)continue;//ya se lo envie
-              user.salida2.writeInt(2);//opcion de agregar 
-              user.salida2.writeUTF(this.getNameUser());	
-            }catch (IOException e) {e.printStackTrace();}
-        }
-     }
-     /**
-      * Método para enviar un mensaje a un usuario específico.
-      * @param amigo Nombre del usuario destinatario.
-      * @param mencli Mensaje a enviar.
-      */
-     /*
-   private void enviaMsg(String amigo, String mencli) 
-   {
-      threadServidor user=null;
-        for(int i=0;i<clientesActivos.size();i++)
-        {           
-           try
-            {
-              user=clientesActivos.get(i);
-              if(user.nameUser.equals(amigo))
-              {
-                 user.salida2.writeInt(3);//opcion de mensage amigo   
-                 user.salida2.writeUTF(this.getNameUser());
-                 user.salida2.writeUTF(""+this.getNameUser()+">"+mencli);
-              }
-            }catch (IOException e) {e.printStackTrace();}
-        }
-   }*/
+
 }
