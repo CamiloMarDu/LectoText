@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.util.Enumeration;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -157,7 +158,19 @@ public class WCliente extends JFrame {
 		
 	}
 	
-	
+	public static JRadioButton getSelection(ButtonGroup group)
+	{
+	        for (Enumeration e=group.getElements(); e.hasMoreElements(); )
+	        {
+	            JRadioButton b = (JRadioButton)e.nextElement();
+	            if (b.getModel() == group.getSelection())
+	            {
+	                return b;
+	            }
+	        }
+
+	        return null;
+	}
 	public String pedirDato(String mensajeSoli) {
 		return JOptionPane.showInputDialog(mensajeSoli);
     }
