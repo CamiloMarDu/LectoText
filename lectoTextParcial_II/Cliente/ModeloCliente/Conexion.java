@@ -3,8 +3,9 @@ package ModeloCliente;
 import java.io.IOException;
 import java.net.Socket;
 
-
-
+/**
+ * Clase que gestiona la conexión del cliente con el servidor.
+ */
 public class Conexion {
 
     private Socket comunication;
@@ -47,3 +48,4 @@ public class Conexion {
         comunication2 = new Socket(IPCliente, prop.getReciboPort());
     }
 }
+

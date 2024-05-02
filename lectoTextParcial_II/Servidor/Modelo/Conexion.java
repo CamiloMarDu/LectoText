@@ -3,12 +3,11 @@ package Modelo;
 import java.io.IOException;
 import java.net.ServerSocket;
 
-
-
-
-
+/**
+ * Clase que gestiona la conexión del servidor.
+ */
 public class Conexion {
-	private ServerSocket serv; // para comunicación
+    private ServerSocket serv; // para comunicación
     private ServerSocket serv2; // para enviar mensajes
     private Propiedades prop;
 
@@ -19,6 +18,7 @@ public class Conexion {
     public Conexion() throws IOException {
         prop = new Propiedades();
 
+        // Se crea el servidor en los puertos especificados en las propiedades
         serv = new ServerSocket(prop.getEnvioPort());
         serv2 = new ServerSocket(prop.getReciboPort());
     }

@@ -3,22 +3,36 @@ package controlador;
 import java.io.IOException;
 import java.net.Socket;
 
-import javax.speech.recognition.ResultEvent;
+
 
 import Modelo.Conexion;
 import vista.WServidor;
 
+
+
+/**
+ * Clase que gestiona el servidor.
+ */
 public class GestorServidor {
-	WServidor vista;
-	public GestorServidor() {
-		vista=new WServidor();
-		
-		vista.setVisible(true);
+    WServidor vista;
+
+    /**
+     * Constructor de la clase GestorServidor.
+     * Inicializa la vista del servidor y comienza a ejecutar el servidor.
+     */
+    public GestorServidor() {
+        vista = new WServidor();
+
+        vista.setVisible(true);
         vista.setResizable(false);
         vista.setTitle("LectoText: SERVIDOR");
         runServer();
-	}
-	public void runServer() {
+    }
+
+    /**
+     * Ejecuta el servidor y maneja las conexiones de los clientes.
+     */
+    public void runServer() {
         boolean listening = true;
         try {
             Conexion con = new Conexion();
@@ -30,7 +44,7 @@ public class GestorServidor {
                     vista.enConsola("Esperando Usuarios");
                     sock = con.getServ().accept();
                     sock2 = con.getServ2().accept();
-                    
+
                 } catch (IOException e) {
                     vista.enConsola("Accept failed: " + con.getServ() + ", " + e.getMessage());
                     continue;
@@ -44,6 +58,4 @@ public class GestorServidor {
             vista.enConsola("error :" + e);
         }
     }
-	 
-	
 }
